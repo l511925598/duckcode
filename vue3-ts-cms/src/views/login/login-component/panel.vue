@@ -35,7 +35,6 @@
     <!--    登录按钮-->
     <el-button @click="login" class="login-btn" type="primary" size="large">立即登录</el-button>
   </div>
-	<div>123</div>
 </template>
 
 <script setup lang="ts">
