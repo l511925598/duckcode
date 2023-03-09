@@ -40,15 +40,19 @@
 <script setup lang="ts">
 import Account from '@/views/login/login-component/account.vue'
 import Phone from '@/views/login/login-component/phone.vue'
-import { ref } from 'vue'
+import { ref ,watch} from 'vue'
+import {localCache} from "@/utils/cache";
 
 const activeName = ref('account')
-const isRemPwd = ref(false)
+const isRemPwd = ref<boolean>(localCache.getCache('isRemPwd') ?? false)
+watch(isRemPwd,(newValue) =>{
+	localCache.setCache('isRemPwd',newValue)
+})
 // const accountRef = ref<InstanceType<typeof Account>>()
 const accountRef = ref<any>()
 function login() {
   if (activeName.value === 'account') {
-    accountRef.value.loginAction()
+    accountRef.value.loginAction(isRemPwd.value)
   } else {
     console.log('用户在用手机登录')
   }

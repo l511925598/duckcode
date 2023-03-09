@@ -23,5 +23,6 @@ import Panel from '@/views/login/login-component/panel.vue'
   justify-content: center;
   width: 100%;
   height: 100%;
+	background: url('../../assets/img/login-bg.svg');
 }
 </style>
