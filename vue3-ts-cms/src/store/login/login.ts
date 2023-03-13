@@ -4,6 +4,8 @@ import type { IAccount } from '@/types'
 import { localCache } from '@/utils/cache'
 import router from '@/router'
 import { LOGIN_TOKEN } from '@/global/constants'
+import type { RouteRecordRaw} from "vue-router";
+import {mapMenusToRoutes} from "@/utils/mac-menus";
 
 const useLoginStore = defineStore('login', {
   state: () => ({
@@ -22,6 +24,11 @@ const useLoginStore = defineStore('login', {
       this.phone = loginResult.data.people.phone
       //2.进行本地缓存
       localCache.setCache(LOGIN_TOKEN, this.token)
+
+      //模拟
+      let useMenus;
+      const routes = mapMenusToRoutes(useMenus = null)
+      routes.forEach((route) => router.addRoute('main',route))
       //3.页面跳转（main页面）
       router.push('/main')
     },

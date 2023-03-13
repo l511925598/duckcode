@@ -17,8 +17,8 @@
 						<el-icon><Monitor /></el-icon>
 						<span>系统总览</span>
 					</template>
-					<el-menu-item index="1-1">核心技术</el-menu-item>
-					<el-menu-item index="1-2">商品统计</el-menu-item>
+					<el-menu-item index="1-1" @click="handleItemClick('/main/analysis/overview')">核心技术</el-menu-item>
+					<el-menu-item index="1-2" @click="handleItemClick('/main/analysis/dashboard')">商品统计</el-menu-item>
 				</el-sub-menu>
 
 				<el-sub-menu index="2">
@@ -48,12 +48,18 @@
 
 <script setup lang="ts">
 
+import router from "@/router";
+
 defineProps({
 	isFold:{
 		type: Boolean,
 		default: false
 	}
 })
+
+function handleItemClick(path){
+	router.push(path)
+}
 </script>
 
 <style lang="less" scoped>

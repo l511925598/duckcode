@@ -7,15 +7,16 @@
 		</div>
 		<div class="content">
 			<div class="breadcrumb">
-				面包xie
+				面包
 			</div>
-			<div class="info">个人信息</div>
+			<HeaderInfo></HeaderInfo>
 		</div>
   </div>
 </template>
 
 <script setup lang="ts">
 import {ref} from "vue";
+import HeaderInfo from "@/components/main-header/c-cpns/header-info.vue";
 const emit = defineEmits(['foldChange'])
 
 const isFold = ref(false)
