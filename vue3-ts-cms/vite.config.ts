@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   server: {
+    // host: '0.0.0.0',
     proxy: {
       '/api': {
         target: 'http://116.204.101.253:8866', //代理的地址

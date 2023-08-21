@@ -50,6 +50,7 @@ function handleFoldChange(flag:boolean){
 	}
 
 	.el-main {
+		--el-main-padding: 0px;
 		background-color: #f0f2f5;
 	}
 }

@@ -7,38 +7,38 @@
 		<div class="menu">
 			<el-menu
 					:collapse="isFold"
-					default-active="1"
+					:default-active="defaultActive"
 					active-text-color="#fff"
 					background-color="#0c2135"
 					text-color="#b7bdc3"
 			>
-				<el-sub-menu index="1">
-					<template #title>
-						<el-icon><Monitor /></el-icon>
-						<span>系统总览</span>
-					</template>
-					<el-menu-item index="1-1" @click="handleItemClick('/main/analysis/overview')">核心技术</el-menu-item>
-					<el-menu-item index="1-2" @click="handleItemClick('/main/analysis/dashboard')">商品统计</el-menu-item>
-				</el-sub-menu>
 
-				<el-sub-menu index="2">
+				<el-sub-menu index="/main/system/">
 					<template #title>
 						<el-icon><Setting /></el-icon>
 						<span>系统管理</span>
 					</template>
-					<el-menu-item index="2-1">用户管理</el-menu-item>
-					<el-menu-item index="2-2">部门管理</el-menu-item>
-					<el-menu-item index="2-3">菜单管理</el-menu-item>
-					<el-menu-item index="2-4">角色管理</el-menu-item>
+					<el-menu-item index="/main/system/user" @click="handleItemClick('/main/system/user')">用户管理</el-menu-item>
+					<el-menu-item index="/main/system/department" @click="handleItemClick('/main/system/department')">部门管理</el-menu-item>
 				</el-sub-menu>
 
-				<el-sub-menu index="3">
+				<el-sub-menu index="/main/analysis/">
+					<template #title>
+						<el-icon><Monitor /></el-icon>
+						<span>系统总览</span>
+					</template>
+					<el-menu-item index="/main/analysis/dashboard" @click="handleItemClick('/main/analysis/dashboard')">商品统计</el-menu-item>
+					<el-menu-item index="/main/analysis/overview" @click="handleItemClick('/main/analysis/overview')">核心技术</el-menu-item>
+				</el-sub-menu>
+
+				<el-sub-menu index="/main/three/">
 					<template #title>
 						<el-icon><ShoppingTrolley /></el-icon>
-						<span>商品管理</span>
+						<span>three.js</span>
 					</template>
-					<el-menu-item index="3-1">商品类别</el-menu-item>
-					<el-menu-item index="3-2">商品信息</el-menu-item>
+					<el-menu-item index="/main/three/round" @click="handleItemClick('/main/three/round')">初体验</el-menu-item>
+					<el-menu-item index="/main/three/material" @click="handleItemClick('/main/three/material')">材质/性能检测器</el-menu-item>
+					<el-menu-item index="/main/three/dat" @click="handleItemClick('/main/three/dat')">控制器</el-menu-item>
 				</el-sub-menu>
 
 			</el-menu>
@@ -49,6 +49,9 @@
 <script setup lang="ts">
 
 import router from "@/router";
+import {useRoute} from "vue-router";
+import {computed, ref} from "vue";
+import {mapPathToMenu} from "@/utils/mac-menus";
 
 defineProps({
 	isFold:{
@@ -56,10 +59,15 @@ defineProps({
 		default: false
 	}
 })
-
 function handleItemClick(path){
 	router.push(path)
 }
+
+const route = useRoute()
+const defaultActive = computed(() => {
+	const pathMenu = mapPathToMenu(route.path)
+	return pathMenu?.path
+})
 </script>
 
 <style lang="less" scoped>
